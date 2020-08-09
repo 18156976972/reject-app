@@ -23,7 +23,7 @@ function App() {
       <Switch>
         <Route path="/login" component={Login}></Route>
         <Route path="/index" component={Index}></Route>
-        <Route path="/rigister" component={Register}></Route>
+        <Route path="/register" component={Register}></Route>
       
         <Route path="home" component={Home}></Route>
         <Route path="/classify" component={Classify}></Route>

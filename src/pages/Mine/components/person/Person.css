@@ -1,0 +1,73 @@
+.person{
+    width: 100%;
+}
+.person-box1{
+    background-color:orange;
+    height: 2.6rem;
+    position: relative;
+}
+.person-box1 p{
+    height: 1rem;
+    line-height: 1rem;
+    /* border: 1px solid #000; */
+    /* text-align: center; */
+    color: white;
+    font-size: 0.4rem;
+}
+.person-box1 p img{
+    width: 100%;
+    height: 100%;
+}
+.person-box1 p span{
+    display: inline-block;
+    width: 0.4rem;
+    height: 0.4rem;
+   display: inline-block;
+   margin-left: 5%;
+   margin-right: 28%;
+}
+.person-box1 p i{
+    display: inline-block;
+    width: 0.4rem;
+    height: 0.4rem;
+    margin-left: 27%;
+}
+.person-box1 .person-img{
+    position:absolute;
+    left:38%;
+    bottom: -30%;
+    width: 1.8rem;
+    height: 1.8rem;
+    background-color: #ffffff;
+    border-radius: 50%;
+}
+.person-box1 .person-img img{
+    width: 84%;
+    height: 84%;
+    margin-top: 8%;
+    margin-left: 8%;
+    border-radius: 50%;
+}
+
+
+
+.person-box2{
+    overflow: hidden;
+    /* background-color:pink; */
+    height: 2.5rem;
+    border-bottom: 0.05rem solid gainsboro;
+}
+.person-box2 p:nth-child(1){
+    font-size: 0.3rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+.person-box2 p:nth-child(2){
+    font-size: 0.35rem;
+    margin-top: 0.3rem;
+}
+.person-box2 p:nth-child(2) img{
+    padding: 0 0.3rem;
+    /* vertical-align: -0.01rem; */
+    
+}

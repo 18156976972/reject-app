@@ -40,9 +40,10 @@ export default class Login extends Component {
                 <div className='login-top'>
                     登录 <span>注册</span>
                 </div>
+                
                 <form>
-                    <p>账号：<input type="text" onChange={(e)=>this.changeUser(e,"name")} /></p>
-                    <p>账号：<input type='passward' onChange={(e)=>this.changeUser(e,"pass")}/></p>
+                    <p>账 号：<input type="text" onChange={(e)=>this.changeUser(e,"name")} /></p>
+                    <p>账 号：<input type='passward' onChange={(e)=>this.changeUser(e,"pass")}/></p>
                     <p className='login-p3'><span>忘记密码</span></p>
                     <button onClick={()=>this.Login()}>登录</button>
                 </form>
