@@ -1,0 +1,128 @@
+.goods{
+    width: 100%;
+    height:calc(100vh - 2.4rem);
+    position: relative;
+}
+.goods ul,li{
+    width: 100%;
+}
+.goods ul li .goods-p1{
+    color: gray;
+    padding: 0.3rem;
+    font-size: 0.3rem;
+}
+.goods ul li .goods-box{
+    display: flex;
+    height: 2.1rem;
+    box-sizing: border-box;
+    /* background-color: pink
+    ; */
+}
+
+.goods ul li .goods-box .goods-right p{
+    font-size: 0.32rem;
+    padding: 0.2rem 0; 
+}
+.goods ul li .goods-box .goods-right p:nth-child(1){
+    margin-bottom: 0.3rem;
+}
+.goods ul li .goods-box .goods-right span{
+    display: inline-block;
+    width: 25%;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    text-align: center;
+    border: 0.01rem solid rgb(196, 185, 185);
+}
+.am-list-item{
+    display: inline-block;
+    padding-top: 11%;
+}
+.am-list-thumb .am-checkbox-wrapper .am-checkbox-inner{
+    border: 1px solid orange !important;
+}
+
+
+.goods ul li .goods-box .goods-price{
+    font-size: 0.32rem;
+    width: 20%;
+    padding-top:0.9rem ;
+    text-align: center;
+}
+.goods ul li .goods-box button{
+    border:  0;
+    background-color:rgb(255, 170, 0);
+    color: white;
+    width: 0.8rem;
+    display: none;
+}
+
+
+
+
+.goods ul li .goods-img1{
+    width: 7%;
+    padding: 0 0.2rem;
+}
+.goods ul li .goods-img2{
+    width:24%;
+    padding-right: 0.3rem;
+}
+
+
+.goods .foot{
+    width: 100%;
+    height: 1.5rem;
+    overflow: hidden;
+    position: absolute;
+    background-color:#fff;
+    bottom:0;
+    box-sizing: border-box;
+    border-top: 0.01rem solid gainsboro;
+}
+.goods .foot .footer-left{
+    float: left;
+    padding-top: 0.1rem;
+}
+.goods .foot .footer-left p{
+    text-align: center;
+    font-size: 0.28rem;
+}
+
+.goods .foot .footer-center{
+    float: left;
+    margin-left: 7%;
+    font-size: 0.28rem;
+}
+.goods .foot .footer-center div:nth-child(1){
+    float: left;
+}
+.goods .foot .footer-center div:nth-child(1) img{
+    width: 0.5rem;
+    padding: 0.2rem;
+}
+.goods .foot .footer-center div:nth-child(1) p{
+   text-align: center;
+}
+.goods .foot .footer-center div:nth-child(2){
+    float: left;
+    padding-top: 0.4rem;
+}
+.goods .foot .footer-center div:nth-child(2) p{
+    padding: 0.1rem;
+}
+.goods .foot .footer-center div:nth-child(2) p:nth-child(2){
+    color: gray;
+}
+
+
+.goods .foot .footer-right{
+    float: right;
+    border:  0;
+    height: 100%;
+    width: 35%;
+    background-color: rgb(255, 170, 0);
+    color: white;
+    font-size: 0.4rem
+    ;
+}

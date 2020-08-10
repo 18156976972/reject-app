@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
-import img1 from '../../../../assets/img/img/home/1.jpg'
 import './List.css'
+import {withRouter} from 'react-router-dom'
 
-export default class List extends Component {
-    
+class List extends Component {
+       
+    getInfo(id){
+        this.props.history.push("/shopdetail/" + id)
+    }
     render() {
         const {list} = this.props
         return (
@@ -18,7 +21,7 @@ export default class List extends Component {
                             <div className='list-right'>
                                 <p>{item.goodsname}</p>
                                 <p>￥{item.price}</p>
-                                <button>立即抢购</button>
+                                <button onClick={()=>this.getInfo(item.id)}>立即抢购</button>
                             </div>
                          </li>
                         })
@@ -29,3 +32,4 @@ export default class List extends Component {
         )
     }
 }
+export default withRouter(List)

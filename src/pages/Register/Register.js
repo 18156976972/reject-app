@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import './Register.css'
-
+import {requestRegister} from '../../util/request'
 export default class Register extends Component {
     constructor(){
         super()
         this.state={
             user:{
-                name:"",
-                pass:""
+                phone:"",
+                nickname:"",
+                password:''
             }
         }
     }
@@ -21,19 +22,29 @@ export default class Register extends Component {
         })
     }
     register(){
-       
+        requestRegister(this.state.user).then(res=>{
+           if(res.data.code===200){
+             alert('登录成功')
+             this.props.history.push("/login")
+        }else{
+            alert(res.data.msg)
+        }
+        })
+    }
+    goback(){
+        this.props.history.push("/login")
     }
 
     render() {
         return (
             <div className='register'>
                 <div className='register-top'>
-                    登录 <span>返回</span>
+                    注册 <span onClick={()=>this.goback()}>返回</span>
                 </div>
                 <form>
-                    <p>手机号：<input type="text" onChange={(e)=>this.changeUser(e,"name")} /></p>
-                    <p>昵 称：<input type='passward' onChange={(e)=>this.changeUser(e,"pass")}/></p>
-                    <p>密 码：<input type='passward' onChange={(e)=>this.changeUser(e,"pass")}/></p>
+                    <p>手机号：<input type="text" onChange={(e)=>this.changeUser(e,"phone")} /></p>
+                    <p>昵 称：<input type='passward' onChange={(e)=>this.changeUser(e,"nickname")}/></p>
+                    <p>密 码：<input type='passward' onChange={(e)=>this.changeUser(e,"password")}/></p>
                     <button onClick={()=>this.register()}>注册</button>
                 </form>
            

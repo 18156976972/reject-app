@@ -12,8 +12,8 @@ const Classify = asyncComponent(()=>import('./pages/Classify/Classify'))
 const ShopsCart = asyncComponent(()=>import('./pages/ShopsCart/ShopsCart'))
 const Mine = asyncComponent(()=>import('./pages/Mine/Mine'))
 
-const ShopDetail = asyncComponent(()=>import('./pages/ShopDetail/ShopDetail'))
 const ShopList = asyncComponent(()=>import('./pages/ShopList/ShopList'))
+const ShopDetail= asyncComponent(()=>import('./pages/ShopDetail/ShopDetail'))
 
 
 function App() {
@@ -29,9 +29,8 @@ function App() {
         <Route path="/classify" component={Classify}></Route>
         <Route path="/shopscart" component={ShopsCart}></Route>
         <Route path="/mine" component={Mine}></Route>
-
-        <Route path="/shopdetail" component={ShopDetail}></Route>
         <Route path="/shoplist" component={ShopList}></Route>
+        <Route path='/shopdetail/:id' component={ShopDetail}></Route>
         
         <Redirect to="/login"></Redirect>
       </Switch>

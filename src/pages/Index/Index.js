@@ -17,6 +17,7 @@ import Home from '../Home/Home'
 import Classify from '../Classify/Classify'
 import ShopsCart from '../ShopsCart/ShopsCart'
 import Mine from '../Mine/Mine'
+import ShopDetail from '../ShopDetail/ShopDetail'
 
 export default class Index extends Component {
     render() {
@@ -27,6 +28,7 @@ export default class Index extends Component {
          <Route path='/index/classify' component={Classify}></Route>
          <Route path='/index/shopscart' component={ShopsCart}></Route>
          <Route path='/index/mine' component={Mine}></Route>
+         
          <Redirect to ='/index/home'></Redirect>
             </Switch>
 
