@@ -2,6 +2,12 @@
 import axios from 'axios'
 import qs from "qs"
 
+//数据请求
+axios.interceptors.response.use(res=>{
+    console.log("请求路径：" + res.config.url);
+    console.log(res);
+    return res
+})
 
 //登录
 export const requestLogin=(data)=>{
@@ -20,11 +26,6 @@ export const requestRegister=(data)=>{
     })
 }
 
-
-axios.interceptors.response.use(res=>{
-    console.log(res);
-    return res
-})
 //轮播图接口
 export const getBanner=()=>{
     return axios({

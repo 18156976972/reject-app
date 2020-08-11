@@ -1,11 +1,4 @@
-import React, { Component } from 'react'
-
-export default class alert extends Component {
-    render() {
-        return (
-            <div>
-                
-            </div>
-        )
-    }
+import { Toast } from "antd-mobile"
+export const successAlert = msg => {
+    Toast.info(msg, 1.5)
 }

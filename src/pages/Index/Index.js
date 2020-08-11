@@ -17,7 +17,7 @@ import Home from '../Home/Home'
 import Classify from '../Classify/Classify'
 import ShopsCart from '../ShopsCart/ShopsCart'
 import Mine from '../Mine/Mine'
-import ShopDetail from '../ShopDetail/ShopDetail'
+
 
 export default class Index extends Component {
     render() {

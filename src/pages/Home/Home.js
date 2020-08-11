@@ -4,50 +4,22 @@ import Banner from './components/Banner/Banner'
 import './Home.css'
 import List from './components/List/List'
 import Nav from './components/Nav/Nav'
+import {connect} from "react-redux"
 
+// 加载数据库中的方法
+import {getHomeList,requestListAction,getHomeBanner,requestBannerAction} from '../../store/modules/home'
 
-import { getBanner,getIndexGoods } from '../../util/request'
-
-
-export default class Home extends Component {
-    constructor() {
-        super()
-        //要用的数据
-        this.state = {
-            banner: [],
-            list:[]
-        }
-    }
+class Home extends Component {
+  
     //页面加载完成
     componentDidMount() {
-        getBanner().then(res => {
-            //整个数组取出
-            var arr = res.data.list;
-            //每一张图片都要循环一遍，加上前缀
-            arr.forEach(item => {
-                item.img = this.$img + item.img
-                // console.log( item.img)
-            })
+        this.props.requestList()
+        this.props.requestBanner()
 
-            this.setState({
-                banner: arr
-            })
-        })
-        getIndexGoods().then(res=>{
-            var arr = res.data.list[0].content;
-
-            arr.forEach(item => {
-                item.img = this.$img + item.img
-            })
-            
-            this.setState({
-                list: arr
-            })
-        })
     }
 
     render() {
-        const { banner,list } = this.state
+        const { list ,banner} = this.props
         return (
             <div className='home'>
                 <Top></Top>
@@ -59,3 +31,21 @@ export default class Home extends Component {
         )
     }
 }
+
+const mapState =state=>{
+    console.log(state)
+      //导出要用的状态层的数据
+      return {
+        list:getHomeList(state),
+        banner:getHomeBanner(state)
+    }
+}
+const mapDispatch=dispatch=>{
+    return {
+        requestList:()=>dispatch(requestListAction()),
+        requestBanner:()=>dispatch(requestBannerAction()) 
+         //requestBannerAction 调用状态层的函数，发出axiso请求， 
+    }
+}
+
+export default connect(mapState,mapDispatch)(Home)

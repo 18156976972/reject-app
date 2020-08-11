@@ -122,6 +122,10 @@
     margin: 0.2rem;
     font-size: 0.34rem;
 }
+.sel{
+    border: 1px solid orange !important;
+    color: orange;
+}
 
 .main-info .info-bottom .in3 button{
     display: block;

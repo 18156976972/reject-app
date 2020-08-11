@@ -9,6 +9,11 @@ import 'antd-mobile/dist/antd-mobile.css'
 //reset.css样式表
 import './assets/css/reset.css'
 import './assets/js/rem'
+
+//  定义中间层
+import store from './store'
+import {Provider} from 'react-redux'
+
 //定义路由模式
 import {HashRouter} from 'react-router-dom'
 
@@ -16,8 +21,10 @@ import {HashRouter} from 'react-router-dom'
 Component.prototype.$img="http://localhost:3000"
 
 ReactDOM.render(
+  <Provider store={store}>
   <HashRouter>
     <App></App>
-  </HashRouter>,
+  </HashRouter>
+  </Provider>,
   document.getElementById('root')
 );

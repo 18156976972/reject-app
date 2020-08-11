@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import './Login.css'
 import {requestLogin} from '../../util/request'
+import {successAlert} from '../../util/alert.js'
 
-export default class Login extends Component {
+import {connect} from "react-redux"
+import { changeUserAction } from '../../store/modules/user'
+
+class Login extends Component {
     constructor(){
         super()
         this.state={
@@ -24,12 +28,15 @@ export default class Login extends Component {
     login(){
        //把user的值传会数据库
         requestLogin(this.state.user).then(res=>{
-            console.log(res)
             if(res.data.code===200){
-                sessionStorage.setItem("isLogin",1)
+                //路由标识
+                successAlert('登录成功')
+                // sessionStorage.setItem("isLogin",1)
+
+                sessionStorage.setItem('user',JSON.stringify(res.data.list))
                 this.props.history.push("/index/home")
             }else{
-                alert(res.data.msg)
+                successAlert(res.data.msg)
             }
         })
 
@@ -56,3 +63,19 @@ export default class Login extends Component {
         )
     }
 }
+
+const mapState=(state)=>{
+    //导出数据
+    console.log(state)
+    return{
+    }
+}
+
+const mapDispatch=(dispatch)=>{
+    return{
+        change:(user)=>dispatch(changeUserAction(user))
+    }
+}
+
+//变成容器型组件
+export default connect(mapState,mapDispatch)(Login)
