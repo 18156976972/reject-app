@@ -1,24 +1,20 @@
 import React, { Component } from 'react'
 import './Content.css'
-import {getCate} from '../../../util/request'
-import img1 from '../../../assets/img/img/home/1.jpg'
-export default class Content extends Component {
+
+import {withRouter} from 'react-router-dom'
+import {connect} from "react-redux"
+import {getlist,requestClassifyAction} from '../../../store/modules/classify'
+
+ class Content extends Component {
     constructor(){
         super()
         this.state={
-            list: [],
             n:0
         }
      }
 
     componentDidMount() {
-        //axios
-        getCate().then(res => {
-            
-            this.setState({
-                list: res.data.list
-            })
-        })
+        this.props.requestList()
     }
     //更具下标找到对应的数据
     changeN(index){
@@ -26,10 +22,17 @@ export default class Content extends Component {
             n:index
         })
     }
+
+    getGoodsInfo(id){
+        this.props.history.push("/shoplist/" + id)
+    }
+
     render() {
-        const { list,n }=this.state
+        const { n }=this.state
+        const { list }=this.props
         return (
             <div className='content'>
+                {/* 左边 */}
                 <div className='content-left'>
                     <ul>
                         {
@@ -40,11 +43,12 @@ export default class Content extends Component {
 
                     </ul>
                 </div>
+                {/* 右边 */}
                 <div className='content-right'>
                    
                     <ul>
                     {
-                    list.length>0 ? list[n].children.map(item=>{return <li key={item.id}><img src={item.img}></img><span>{item.catename}</span></li>}):null
+                    list.length>0 ? list[n].children.map(item=>{return <li key={item.id} onClick={()=>this.getGoodsInfo(item.id)} info={item.catename}><img src={item.img}></img><span>{item.catename}</span></li>}):null
                     }         
                     </ul>
                 </div>
@@ -52,3 +56,18 @@ export default class Content extends Component {
         )
     }
 }
+const mapState=state=>{
+    console.log(state)
+    //导出要用的状态层的数据
+    return {
+        list:getlist(state),
+    }
+}
+const mapDispatch=dispatch=>{
+    return {
+        requestList:()=>dispatch(requestClassifyAction())
+            
+    }
+}
+
+export default connect(mapState,mapDispatch)(withRouter(Content))

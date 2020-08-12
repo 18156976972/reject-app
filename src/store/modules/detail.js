@@ -14,6 +14,12 @@ export const changeInfoAction = info => {
 //详情的请求的action
 export const requestDetailAction =(id)=>{
     return (dispatch,getState)=>{
+        //避免重复加载 详情页面的重复加载
+        const {info}=getState().detail
+        if(parseInt(id)===info.id){
+            return;
+        }
+
         getGoodsInfo({id:id}).then(res=>{
             dispatch(changeInfoAction(res.data.list[0]))
         })

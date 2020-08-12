@@ -13,11 +13,11 @@
     position: absolute;
     right: 0.3rem;
 }
-.login form{
+.login .form{
     padding: 2rem 1rem;
     font-size: 0.3rem;
 }
-.login form p{
+.login .form p{
     font-size: 0.3rem;
     width: 100%;
     padding-bottom: 0.4rem;
@@ -27,7 +27,7 @@
 .login .login-p3{
     position: relative;
     font-size: 0.25rem;
-    border-bottom: 0rem solid;
+    border-bottom: 0rem !important;
 }
 .login .login-p3 span{
     position: absolute;

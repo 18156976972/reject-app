@@ -47,6 +47,19 @@ export const getCate=()=>{
         method:"get"
     })
 }
+//获取分类商品
+export const getGoods=(params)=>{
+    return axios({
+        url:'/api/getgoods',
+        method:'get',
+        params:params
+    })
+}
+
+
+
+
+
 
 //获取具体某个商品信息
 export const getGoodsInfo=(params)=>{
@@ -54,5 +67,40 @@ export const getGoodsInfo=(params)=>{
         url:'/api/getgoodsinfo',
         method:'get',
         params:params
+    })
+}
+
+//加入购物车
+export const addShop = (data) => {
+    return axios({
+        url: "/api/cartadd",
+        method: "post",
+        data: qs.stringify(data)
+    })
+}
+/////////////////////购物车列表
+//购物车列表
+export const requestShopList = (data) => {
+    return axios({
+        url: "/api/cartlist",
+        params: data
+    })
+}
+
+//修改
+export const requestShopEdit = (data) => {
+    return axios({
+        url: "/api/cartedit",
+        method:"post",
+        data: qs.stringify(data)
+    })
+}
+
+//删除
+export const requestShopDel = (data) => {
+    return axios({
+        url: "/api/cartdelete",
+        method:"post",
+        data: qs.stringify(data)
     })
 }

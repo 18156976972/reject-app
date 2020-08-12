@@ -8,3 +8,7 @@
     font-size: 0.4rem;
     text-align: center;
 }
+.header-back{
+    position: absolute;
+    left: 0.5rem;
+}

@@ -1,59 +1,98 @@
 import React, { Component } from 'react'
 import './Goods.css'
 import pic from '../../../../assets/img/store.png'
-import pic1 from '../../../../assets/img/1.jpg'
-import pic2 from '../../../../assets/img/editor_nor.png'
 import {  Checkbox } from 'antd-mobile';
-const CheckboxItem = Checkbox.CheckboxItem;
 
-export default class Goods extends Component {
+import selectImg from "../../../../assets/img/radio_hig.png"
+import noSelect from "../../../../assets/img/radio_nor.png"
+import editorY from "../../../../assets/img/editor_hig.png"
+import editorN from "../../../../assets/img/editor_nor.png"
+import {successAlert}  from '../../../../util/alert'
+ 
+
+import { connect } from "react-redux"
+import {
+    shopList,
+    requestListAction,
+    isEditor,
+    changeIsEditorAction,
+    isAll,
+    requestEditAction,
+    changeIsAllAction,
+    changeOneAction,
+    requestDelAction, 
+    getAllPrice
+} from '../../../../store/modules/shop'
+
+
+
+class Goods extends Component {
+
+    componentDidMount() {
+        this.props.requestList()
+    }
+    //减的按钮 ，减的时候也是发起axios
+    sub(item) {
+        if (item.num <= 1) {
+            successAlert("宝贝不能再少了");
+            return
+        } 
+        //发起axios 
+        this.props.requestEditAction({ id: item.id, type: 1 })
+    }
+
     render() {
+        const {
+            list,
+             isEditor,
+            changeIsEditor, //调用这个方法
+            isAll,
+            changeIsAll,
+            changeOne,
+            getAllPrice,
+            requestEditAction,
+            requestDelAction,
+        } = this.props
+        console.log(isAll)
         return (
             <div className='goods'>
                 <ul>
-                    <li>
-                    <p className='goods-p1'><img src={pic} className='goods-img1'></img><span>杭州保税区仓</span></p>
-                    <div className='goods-box'>
-                    <CheckboxItem ></CheckboxItem>
-                        <img src={pic1} className='goods-img2'></img>
-                        <div className='goods-right'>
-                           <p>雪豹秋日牛皮男装</p>
-                           <span>-</span> <span>1</span> <span>+</span>
-                           <p>总价：368.00</p>
-                        </div>
-                        <p className='goods-price'>￥368.00</p>
-                        <button>删除</button>
-                    </div>
-                    </li>
+                     
+                    {
+                         list.map((item, index) =>{
+                    return ( <li key={item.id} className={isEditor ? 'inner' : ''}>
 
-                    <li>
-                    <p className='goods-p1'><img src={pic} className='goods-img1'></img><span>杭州保税区仓</span></p>
-                    <div className='goods-box'>
-                    <CheckboxItem ></CheckboxItem>
-                        <img src={pic1} className='goods-img2'></img>
-                        <div className='goods-right'>
-                           <p>雪豹秋日牛皮男装</p>
-                           <span>-</span> <span>1</span> <span>+</span>
-                           <p>总价：368.00</p>
+                        <p className='goods-p1'><img src={pic} className='goods-img1'></img><span>杭州保税区仓</span></p>
+                        <div className='goods-box'>
+
+                        <img onClick={() => changeOne(index)} className="shop-item-selectImg" src={item.checked ? selectImg : noSelect} alt="" />
+                            <img src={item.img} className='goods-img2'></img>
+                            <div className='goods-right'>
+                               <p>{item.goodsname}</p>
+                               <span onClick={() => this.sub(item)}>-</span> <span>{item.num}</span> <span onClick={() => requestEditAction({ id: item.id, type: 2 })}>+</span>
+                               <p>总价：{item.price * item.num}</p>
+                            </div>
+                            <p className='goods-price'>￥{item.price}</p>
+                            <button onClick={()=>requestDelAction(item.id)}>删除</button>
                         </div>
-                        <p className='goods-price'>￥368.00</p>
-                        <button>删除</button>
-                    </div>
-                    </li>
+                        </li>)
+                         })
+                    }
+                   
                 </ul>
             
                 <div className='foot'>
-                    <div className='footer-left'>
-                    <CheckboxItem ></CheckboxItem>
+                    <div className='footer-left' onClick={() => changeIsAll()}>
+                    <img src={isAll ? selectImg : noSelect} alt="" />
                     <p>全选</p>
                     </div>
                     <div className='footer-center'>
-                       <div>
-                           <img src={pic2}></img>
+                       <div onClick={() => changeIsEditor()}>
+                           <img src={editorY}></img>
                            <p>编辑</p>
                        </div>
                        <div>
-                           <p>合计：0</p>
+                <p>合计：{getAllPrice}</p>
                            <p>(不含运费)</p>
                        </div>
                     </div>
@@ -67,3 +106,26 @@ export default class Goods extends Component {
         )
     }
 }
+
+const mapState = state => {
+    // console.log(state.shop);
+    return {
+        list: shopList(state),
+        isEditor: isEditor(state),
+        isAll: isAll(state),
+        getAllPrice: getAllPrice(state) //获取计算出的总价格
+    }
+}
+const mapDispatch = dispatch => {
+    return {
+        requestList: () => dispatch(requestListAction()),
+        changeIsEditor: () => dispatch(changeIsEditorAction()),
+        changeIsAll: () => dispatch(changeIsAllAction()),  //  全选
+
+        changeOne: (index) => dispatch(changeOneAction(index)),
+        requestEditAction: (data) => dispatch(requestEditAction(data)), //编辑加减
+         requestDelAction: id => dispatch(requestDelAction(id))  //删除某个
+    }
+}
+
+export default connect(mapState, mapDispatch)(Goods)

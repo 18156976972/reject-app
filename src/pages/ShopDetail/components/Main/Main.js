@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import './Main.css'
 import { withRouter } from 'react-router-dom'
 import { connect } from "react-redux"
-
-
 import picc from '../../../../assets/img/img/cart_on.png'
 
 import {getInfo,requestDetailAction} from '../../../../store/modules/detail'
+import { addShop } from "../../../../util/request"
+import {successAlert} from '../../../../util/alert'
+import { getUser } from '../../../../store/modules/user'
 
 class Main extends Component {
     constructor() {
@@ -20,12 +21,6 @@ class Main extends Component {
         // console.log(this.props)
         this.id = this.props.match.params.id;
         this.props.requestDetail(this.id)
-
-        /* getGoodsInfo({ id: id }).then(res => {
-            this.setState({
-                detail: res.data.list[0]
-            })
-        }) */
     }
 
     getInfo() {
@@ -43,6 +38,20 @@ class Main extends Component {
             n:index
         })
     }
+    ////加入购物车
+      
+    //加入购物车
+    addShop() {
+        addShop({
+            uid: this.props.user.uid,
+            goodsid: this.id,
+            num: 1
+        }).then(res => {
+            successAlert(res.data.msg)
+            this.cancel()
+        })
+    }
+
     render() {
         const { style,n } = this.state
         const {detail} =this.props
@@ -78,7 +87,7 @@ class Main extends Component {
                             }) : null}
                         </div>
                         <div className='in3'>
-                            <button>加入购物车</button>
+                            <button onClick={() => this.addShop()}>加入购物车</button>
                         </div>
                     </div>
                 </div>
@@ -91,6 +100,7 @@ const mapState = state => {
     console.log(state);
     return {
         detail: getInfo(state),
+        user: getUser(state)   //加载用户仓库
     }
 }
 const mapDispatch = dispatch => {

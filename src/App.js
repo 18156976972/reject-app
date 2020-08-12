@@ -1,6 +1,8 @@
 import React from 'react';
 import {Switch,Route,Redirect} from 'react-router-dom'
-//定义路由
+//自定义路由拦截模块
+import MyRoute from "./pages/MyRoute/MyRoute"
+
 //懒加载模块的引入
 import asyncComponent from "./util/asyncComponent"
 import Login from './pages/Login/Login'
@@ -22,15 +24,15 @@ function App() {
       {/* 接口 */}
       <Switch>
         <Route path="/login" component={Login}></Route>
-        <Route path="/index" component={Index}></Route>
-        <Route path="/register" component={Register}></Route>
+        <MyRoute path="/index" component={Index}></MyRoute>
+        <MyRoute path="/register" component={Register}></MyRoute>
       
-        <Route path="home" component={Home}></Route>
-        <Route path="/classify" component={Classify}></Route>
-        <Route path="/shopscart" component={ShopsCart}></Route>
-        <Route path="/mine" component={Mine}></Route>
-        <Route path="/shoplist" component={ShopList}></Route>
-        <Route path='/shopdetail/:id' component={ShopDetail}></Route>
+        <MyRoute path="home" component={Home}></MyRoute>
+        <MyRoute path="/classify" component={Classify}></MyRoute>
+        <MyRoute path="/shopscart" component={ShopsCart}></MyRoute>
+        <MyRoute path="/mine" component={Mine}></MyRoute>
+        <MyRoute path="/shoplist/:id" component={ShopList}></MyRoute>
+        <MyRoute path='/shopdetail/:id' component={ShopDetail}></MyRoute>
         
         <Redirect to="/login"></Redirect>
       </Switch>

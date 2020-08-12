@@ -26,38 +26,47 @@ class Login extends Component {
         })
     }
     login(){
+        console.log(12)
        //把user的值传会数据库
         requestLogin(this.state.user).then(res=>{
             if(res.data.code===200){
                 //路由标识
                 successAlert('登录成功')
-                // sessionStorage.setItem("isLogin",1)
+                this.props.change(res.data.list)  
 
-                sessionStorage.setItem('user',JSON.stringify(res.data.list))
-                this.props.history.push("/index/home")
+               /*  if(this.props.user){
+                    sessionStorage.removeItem('user');
+                }else{
+                    sessionStorage.setItem('user',JSON.stringify(res.data.list))
+                } */
+                sessionStorage.setItem("user",JSON.stringify(res.data.list))
+                this.props.history.push("/index")
+                
             }else{
                 successAlert(res.data.msg)
             }
         })
 
     }
-    go(){
+    goo(){
         this.props.history.push('/register')
     }
 
     render() {
+        const {user}=this.state
         return (
             <div className='login'>
                 <div className='login-top'>
-                    登录 <span onClick={()=>this.go()}>注册</span>
+                    登录 <span onClick={()=>this.goo()}>注册</span>
                 </div>
                 
-                <form>
-                    <p>账 号：<input type="text" onChange={(e)=>this.changeUser(e,"phone")} /></p>
-                    <p>密 码：<input type='passward' onChange={(e)=>this.changeUser(e,"password")}/></p>
+                <div className='form'>
+                    <p>账 号：<input type="text" value={user.phone} onChange={(e)=>this.changeUser(e,"phone")} /></p>
+                    <p>密 码：<input type='passward' value={user.password} onChange={(e)=>this.changeUser(e,"password")}/></p>
                     <p className='login-p3'><span>忘记密码</span></p>
                     <button onClick={()=>this.login()}>登录</button>
-                </form>
+
+                </div>
            
             </div>
         )
