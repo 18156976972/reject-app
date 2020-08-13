@@ -19,14 +19,14 @@ class Home extends Component {
     }
 
     render() {
-        const { list ,banner} = this.props
+        const { list1 ,banner} = this.props
         return (
             <div className='home'>
                 <Top></Top>
                 {/* 自定义属性，父传子 */}
                 <Banner banner={banner}></Banner>
                 <Nav></Nav>
-                <List list={list}></List>
+                <List listt={list1}></List>
             </div>
         )
     }
@@ -36,7 +36,7 @@ const mapState =state=>{
     console.log(state)
       //导出要用的状态层的数据
       return {
-        list:getHomeList(state),
+        list1:getHomeList(state),
         banner:getHomeBanner(state)
     }
 }

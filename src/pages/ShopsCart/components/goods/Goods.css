@@ -1,3 +1,6 @@
+.bb{
+    display: none !important;
+}
 .shop-item-selectImg{
     width:8%;
     height: 25%;
@@ -18,6 +21,7 @@
 }
 .goods ul li{
      width: 110%;
+     height: 4.2rem;
 } 
 .goods ul li .goods-p1{
     color: gray;
@@ -148,4 +152,22 @@
     color: white;
     font-size: 0.4rem
     ;
+}
+
+
+.kong{
+    width: 100%;
+    height:calc(100vh - 2.4rem)
+}
+.kong div{
+    width: 100%;
+    text-align: center;
+    padding-top: 40%;
+}
+.kong div img{
+    width: 15%;
+}
+.kong div p{
+    font-size: 0.35rem;
+    padding:0.2rem 0;
 }

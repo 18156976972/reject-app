@@ -1,13 +1,32 @@
 // 写 axios 的响应，请求数据
 import axios from 'axios'
 import qs from "qs"
-
-//数据请求
-axios.interceptors.response.use(res=>{
-    console.log("请求路径：" + res.config.url);
-    console.log(res);
-    return res
+import {successAlert} from '../util/alert'
+//请求拦截
+axios.interceptors.request.use(config => {
+    if (config.url !='/api/userlogin') {
+        config.headers.authorization =JSON.parse(sessionStorage.getItem("user")) 
+        console.log(config.headers.authorization)
+    }
+    return config
 })
+
+//响应拦截
+axios.interceptors.response.use(res => {
+    console.group("本次路径：" + res.config.url)
+    console.log(res)
+    console.groupEnd()
+
+    if(res.data.msg==="登录已过期或访问权限受限"){
+        successAlert("登录已过期或访问权限受限")
+        window.open('/login')
+        return;
+    }
+    return res;
+})
+
+
+
 
 //登录
 export const requestLogin=(data)=>{

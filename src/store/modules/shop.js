@@ -29,7 +29,7 @@ export const requestListAction = () => {
                 item.checked = false
             })
 
-            dispatch(changeListAction(list))
+            dispatch(changeListAction(res.data.list))
         })
     }
 }
@@ -60,9 +60,12 @@ export const requestEditAction=data=>{
 export const requestDelAction=id=>{
     return (dispatch)=>{
         requestShopDel({id:id}).then(res=>{
-            dispatch(requestListAction())
             //requestListAction() 页面求情数据
+                dispatch(requestListAction())
+            
         })
+        
+        
     }
 }
 
@@ -114,15 +117,20 @@ export const isEditor = state => state.shop.isEditor;
 export const isAll = state => state.shop.isAll;
 //计算总价格 ,传出去
 export const getAllPrice = state => {
-    /*
+    
     var sum=0;
     const {list}=state.shop
-    list.forEach(item=>{
-        if(item.checked){
-            sum+=item.price*item.num
-        }
-    })
-    return sum*/
-    const { list } = state.shop
-    return list.reduce((val, item) => item.checked ? val + item.price * item.num : val, 0)
+    if(list){
+        list.forEach(item=>{
+            if(item.checked){
+                sum+=item.price*item.num
+            }
+        })
+        return sum
+    }else{
+        return sum
+    }
+   /*  const { list } = state.shop
+
+    return list.reduce((val, item) => item.checked ? val + item.price * item.num : val, 0)  */
 }

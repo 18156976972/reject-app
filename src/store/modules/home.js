@@ -3,15 +3,15 @@ import { getBanner,getIndexGoods } from '../../util/request'
 
 //状态
 const initState = {
-    list: [],
+    list1: [],
     banner: []
 }
 
 // 修改list 
-export const changeListAction = list => {
+export const changeListAction = list1 => {
     return {
         type: "changeList",
-        list
+        list1
     }
 }
 
@@ -21,7 +21,7 @@ export const requestListAction=()=>{
         //list有值时，不在请求数据
         //变量解析，取list的值
         const {list} =getState().home   // 类似  const {list,banner}=this.props
-        if(list.length>0){
+        if(list){
             return
         }
         getIndexGoods().then(res=>{
@@ -57,7 +57,7 @@ const reducer =(state=initState,action)=>{
         case 'changeList':
             return{
                 ...state,
-                list:action.list
+                list1:action.list1
             }
         case 'changeBanner':
             return{
@@ -72,7 +72,7 @@ const reducer =(state=initState,action)=>{
 export default reducer
 
 //导出状态
-export const getHomeList= state =>state.home.list
+export const getHomeList= state =>state.home.list1
 
 export const getHomeBanner= state =>state.home.banner
 
